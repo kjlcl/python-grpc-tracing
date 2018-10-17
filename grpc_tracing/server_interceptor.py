@@ -68,7 +68,8 @@ class TracingInterceptor(grpc.ServerInterceptor):
     def intercept_service(self, continuation, handler_call_details):
         def tracing_wrapper(behavior, request_streaming, response_streaming):
             def new_behavior(request_or_iterator, servicer_context):
-                with self._start_span(servicer_context, handler_call_details.method) as span:
+                with self._start_span(
+                        servicer_context, handler_call_details.method) as span:
                     try:
                         return behavior(request_or_iterator, servicer_context)
                     except Exception as e:
@@ -76,4 +77,5 @@ class TracingInterceptor(grpc.ServerInterceptor):
                         span.log_kv({'event': 'error', 'error.object': e})
             return new_behavior
 
-        return _wrap_rpc_behavior(continuation(handler_call_details), tracing_wrapper)
+        return _wrap_rpc_behavior(
+            continuation(handler_call_details), tracing_wrapper)
