@@ -7,7 +7,7 @@ PY3 = sys.version_info >= (3,)
 _tracer = None
 
 
-def _init_tracer(
+def init_tracer(
         service_name, host_ip, reporting_port=6831, sampling_port=5778):
     """init jaeger client"""
     config = Config(
