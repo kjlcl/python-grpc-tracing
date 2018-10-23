@@ -10,7 +10,7 @@ with open('requirements.txt', 'r') as f:
     requirements = f.read().split()
 
 setup(name='python_grpc_tracing',
-      version='0.1.2',
+      version='0.1.3',
       description='Python gRPC jaeger tracing Interceptors',
       long_description=long_description,
       long_description_content_type="text/markdown",
