@@ -1,5 +1,5 @@
 import sys
-from jaeger_client import Config
+from jaeger_client.config import Config
 
 
 PY3 = sys.version_info >= (3,)
