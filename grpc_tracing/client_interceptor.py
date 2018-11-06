@@ -56,13 +56,13 @@ class TracingClientInterceptor(grpc.UnaryUnaryClientInterceptor,
         metadata = () if metadata is None else tuple(metadata)
         return metadata + tuple((k.lower(), v) for (k, v) in iteritems(headers))
 
-    def _start_span(self, method):
+    def _start_span(self, method, parent=None):
         client_tags = {
             tags.COMPONENT: 'grpc',
             tags.SPAN_KIND: tags.SPAN_KIND_RPC_CLIENT
         }
         return self._tracer.start_span(
-            operation_name=method, tags=client_tags)
+            operation_name=method, tags=client_tags, child_of=parent)
 
     def _intercept_call(self, continuation,
                         client_call_details, request_or_iterator):
@@ -75,7 +75,8 @@ class TracingClientInterceptor(grpc.UnaryUnaryClientInterceptor,
                     metadata,
                     client_call_details.credentials)
                 # setattr(client_call_details, 'metadata', metadata)
-                return continuation(new_call_detial, request_or_iterator)
+                result = continuation(new_call_detial, request_or_iterator)
+                return result
 
         return continuation(client_call_details, request_or_iterator)
 

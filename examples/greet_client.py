@@ -3,7 +3,7 @@ import helloworld_pb2_grpc
 import helloworld_pb2
 import time
 from grpc_tracing.client_interceptor import TracingClientInterceptor
-from grpc_tracing.jaeger_client import init_tracer
+from grpc_tracing.jaeger_trace_client import init_tracer
 
 
 if __name__ == '__main__':

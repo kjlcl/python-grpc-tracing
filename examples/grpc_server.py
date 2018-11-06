@@ -2,7 +2,7 @@ import grpc
 import os
 import time
 from concurrent import futures
-from grpc_tracing.jaeger_client import init_tracer
+from grpc_tracing.jaeger_trace_client import init_tracer
 from grpc_tracing.server_interceptor import TracingInterceptor
 import helloworld_pb2_grpc
 import helloworld_pb2
