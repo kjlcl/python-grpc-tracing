@@ -84,6 +84,7 @@ def init_tracer(
                 'reporting_host': host_ip
             },
             'logging': True,
+            'propagation': 'b3',
         }, service_name=service_name, validate=True)
     jaeger_tracer = config.initialize_tracer()
     if jaeger_tracer:
